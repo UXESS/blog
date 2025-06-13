@@ -65,28 +65,32 @@ jobs:
           echo "Contents of .build directory:"
           ls -la .build/
           
-          # Create a simple index.html for testing
-          echo "Creating test index.html..."
-          cat > public/index.html << 'EOL'
-          <!DOCTYPE html>
-          <html lang="en">
-          <head>
-              <meta charset="UTF-8">
-              <meta name="viewport" content="width=device-width, initial-scale=1.0">
-              <title>UXESS Accessibility</title>
-          </head>
-          <body>
-              <h1>Welcome to UXESS Accessibility</h1>
-              <p>This is a test page to verify GitHub Pages deployment.</p>
-          </body>
-          </html>
-          EOL
+          # Copy all files from .build to public
+          echo "Copying files to public directory..."
+          cp -r .build/* public/ || {
+            echo "Failed to copy files to public directory"
+            exit 1
+          }
+          echo "Files copied successfully"
+          
+          # Create landing page (root index.html)
+          if [ -f "public/landing/NGO/index.html" ]; then
+            echo "Creating landing page..."
+            cp public/landing/NGO/index.html public/index.html
+            # Fix URLs in the landing page
+            sed -i 's|http://localhost:1313/|/|g' public/index.html
+            sed -i 's|/landing/NGO/|/|g' public/index.html
+            echo "Landing page created successfully"
+          else
+            echo "Error: public/landing/NGO/index.html not found"
+            exit 1
+          fi
           
           # Debug: List contents of public directory
           echo "Final contents of public directory:"
           ls -la public/
           echo "Contents of index.html:"
-          cat public/index.html
+          head -n 5 public/index.html
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
