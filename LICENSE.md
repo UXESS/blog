@@ -1,3 +1,4 @@
-Please read the full licensing terms on the following link:
+All rights reserved.
 
-https://flowbite.com/license/
+This source code is published on a public repository only for deployment purposes.  
+Unauthorized copying, distribution, or reuse is not permitted.
