@@ -1,0 +1,28 @@
+{{ if ( eq .Page.Params.footer "default") }}
+<footer class="p-4 bg-white md:p-8 lg:p-10  dark:bg-black_bg_card w-full">
+    <div class="mx-auto max-w-screen-xl text-center">
+        <a href="{{ .Site.Params.baseURL }}/" class="flex flex-col items-center" tabindex="-1">
+            <img src="{{ `/UXESS_img/UXESS.svg` | relURL }}" class="h-11 w-auto mr-3 block dark:hidden" alt="UXESS Logo" />
+            <img src="{{ `/UXESS_img/UXESS-dark.svg` | relURL }}" class="h-11 w-auto mr-3 hidden dark:block" alt="UXESS Logo" />
+        </a>
+    </div>
+        <p class="my-6 text-gray-500 dark:text-gray-400 text-center">Open-source library of over 400+ web components and interactive elements built for better web.</p>
+        <ul class="flex flex-wrap justify-center items-center mb-6 text-gray-900 dark:text-white">
+            <li>
+                <a href="/landing/NGO/" class="mr-4 hover:underline md:mr-6 focus:ring-4 focus:ring-primary-400 focus:ring-offset-2 focus:outline-none dark:focus:ring-primary-400 dark:focus:ring-offset-2 rounded-md">Home</a>
+            </li>
+            <li>
+                <a href="/blog/homepage/" class="mr-4 hover:underline md:mr-6 focus:ring-4 focus:ring-primary-400 focus:ring-offset-2 focus:outline-none dark:focus:ring-primary-400 dark:focus:ring-offset-2 rounded-lg">Blog</a>
+            </li>
+            <li>
+                <a href="/blog/homepage/" class="mr-4 hover:underline md:mr-6 focus:ring-4 focus:ring-primary-400 focus:ring-offset-2 focus:outline-none dark:focus:ring-primary-400 dark:focus:ring-offset-2 rounded-lg">About us</a>
+            </li>
+            <li>    
+                <a href="#" class="mr-4 hover:underline md:mr-6 focus:ring-4 focus:ring-primary-400 focus:ring-offset-2 focus:outline-none dark:focus:ring-primary-400 dark:focus:ring-offset-2 rounded-lg">Contact us</a>
+            </li>
+            <li>
+        </ul>
+        <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2021-<span id="currentYear">2023</span> <a href="https://flowbite.com" class="hover:underline"></a>. All Rights Reserved.</span>
+    </div>
+</footer>
+{{ end }}

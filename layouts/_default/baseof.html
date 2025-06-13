@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en" class="">
+
+<head>
+  {{ partial "header" . }}
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+</head>
+{{ block "body_override" . }}
+
+<body class="{{ if .Params.white_bg }}bg-white dark:bg-black{{ else }}bg-white dark:bg-black{{ end }}">{{ end }}
+  {{ partial "skippy" . }}
+
+  {{ block "main" . }}
+  {{ end }}
+
+  <!-- JavaScript Files -->
+  <script src="{{ "/app.bundle.js" | relURL }}"></script>  {{ partial "scripts" . }}
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Slide-in animations
+      const sarah = document.querySelector('.animate-slide-in-left');
+      const beu = document.querySelector('.animate-slide-in-right');
+      
+      if (sarah && beu) {
+        sarah.style.animation = 'none';
+        beu.style.animation = 'none';
+        
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              console.log('About section visible, triggering animations');
+              sarah.style.animation = 'slideInLeft 1.2s ease-out forwards 0.3s';
+              beu.style.animation = 'slideInRight 1.2s ease-out forwards 0.3s';
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.5 });
+        
+        const aboutSection = document.querySelector('#about');
+        if (aboutSection) {
+          observer.observe(aboutSection);
+        } else {
+          console.error('About section not found');
+        }
+      } else {
+        console.error('Sarah or Beu elements not found');
+      }
+      
+      // Scroll effect (horizontal parallax)
+      const scrollElements = document.querySelectorAll('.scroll-move');
+      if (scrollElements.length) {
+        let lastScrollY = window.scrollY;
+        window.addEventListener('scroll', () => {
+          const scrollY = window.scrollY;
+          const delta = scrollY - lastScrollY; // Positive when scrolling down, negative when up
+          scrollElements.forEach((el, index) => {
+            const currentTransform = getComputedStyle(el).transform !== 'none' 
+              ? new WebKitCSSMatrix(getComputedStyle(el).transform).m41 
+              : 0;
+            let offset = currentTransform + (index === 0 ? delta * 0.1 : -delta * 0.1);
+            offset = Math.min(Math.max(offset, -20), 20); // Limit to ±20px
+            el.style.transform = `translateX(${offset}px)`;
+          });
+          lastScrollY = scrollY;
+        });
+      } else {
+        console.error('Scroll-move elements not found');
+      }
+    });
+  </script>
+</body>
+
+</html>

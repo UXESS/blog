@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>http://localhost:1313/about/about/</loc>
+  </url>
+  <url>
+    <loc>http://localhost:1313/about/</loc>
+  </url>
+  <url>
+    <loc>http://localhost:1313/blog/</loc>
+  </url>
+  <url>
+    <loc>http://localhost:1313/contact/contact/</loc>
+  </url>
+  <url>
+    <loc>http://localhost:1313/contact/</loc>
+  </url>
+  <url>
+    <loc>http://localhost:1313/landing/</loc>
+  </url>
+  <url>
+    <loc>http://localhost:1313/blog/article/</loc>
+  </url>
+  <url>
+    <loc>http://localhost:1313/blog/article2/</loc>
+  </url>
+  <url>
+    <loc>http://localhost:1313/blog/homepage/</loc>
+  </url>
+  <url>
+    <loc>http://localhost:1313/</loc>
+  </url>
+  <url>
+    <loc>http://localhost:1313/landing/ngo/</loc>
+  </url>
+</urlset>

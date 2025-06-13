@@ -1,0 +1,308 @@
+@import "tailwindcss";
+@import "../assets/css/typography.css";
+
+@plugin "flowbite/plugin";
+@plugin "flowbite-typography";
+
+@source "../node_modules/flowbite";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-white: #FFFFFE;
+  --color-black: #0D0E10;
+  --color-black_bg_card: #17171A;
+  --color-black_border_card: #282827;
+  --color-white_border_card:#E1E1E4;
+  --color-primary-0: #F0E5FF;
+  --color-primary-24: #FBFAFF;
+  --color-primary-50: #f3f2ff;
+  --color-primary-100: #ebe7ff;
+  --color-primary-200: #d7d2ff;
+  --color-primary-300: #bbaeff;
+  --color-primary-400: #9980ff;
+  --color-primary-500: #7a4cff;
+  --color-primary-600: #6a28ff;
+  --color-primary-700: #5d17eb;
+  --color-primary-800: #4d12c5;
+  --color-primary-900: #4011a1;
+  --color-primary-950: #25076e;
+  --color-gray-50: #f6f6f5;
+  --color-gray-100: #e7e7e6;
+  --color-gray-200: #d1d1d0;
+  --color-gray-300: #b1b1af;
+  --color-gray-400: #8a8a86;
+  --color-gray-500: #6f6f6b;
+  --color-gray-600: #5e5e5c;
+  --color-gray-700: #50504e;
+  --color-gray-800: #454644;
+  --color-gray-900: #3d3d3c;
+  --color-gray-950: #262626;  
+  --color-yellow-50: #F9F7F1;
+  --color-yellow-100: #F2EEDE;
+  --color-yellow-200: #E8E0C4;
+  --color-yellow-300: #D9CBA0;
+  --color-yellow-400: #C7AF75;
+  --color-yellow-500: #B6944E;
+  --color-yellow-600: #A07840;
+  --color-yellow-700: #855E38;
+  --color-yellow-800: #6F4E34;
+  --color-yellow-900: #5A3F2F;
+  --color-yellow-950: #3B271C;  
+  --color-blue-50: #f0f8ff;
+--color-blue-100: #dfefff;
+--color-blue-200: #bde3ff;
+--color-blue-300: #79c9ff;
+--color-blue-400: #32aefe;
+--color-blue-500: #0794f0;
+--color-blue-600: #0075cd;
+--color-blue-700: #005da6;
+--color-blue-800: #034f89;
+--color-blue-900: #094371;
+--color-blue-950: #06294b;
+
+
+  --font-sans: 'Space Grotesk', 'Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', 'sans-serif', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-body: 'Space Grotesk', 'Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', 'sans-serif', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-mono: 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', 'monospace';
+}
+
+
+
+@layer utilities {
+  @keyframes ticker {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  .animate-ticker {
+    animation: ticker 30s linear infinite;
+    will-change: transform;
+    backface-visibility: hidden; /* Prevents flickering */
+    display: flex;
+    align-items: center;
+  }
+  
+
+  .logo-ticker:hover:not(.ticker-controls),
+  .logo-ticker a:focus-within {
+    animation-play-state: paused;
+  }
+  
+
+  .logo-ticker img {
+    width: 112px; /* w-28 */
+    height: auto; /* h-28 */
+    object-fit: contain;
+  }
+
+  .logo-ticker > div {
+    gap: 32px; /* Matches gap-8 in HTML */
+  }
+
+  .logo-ticker-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    
+  }
+  .logo-ticker img {
+    mix-blend-mode: difference;
+}
+.dark .logo-ticker img {
+    mix-blend-mode: normal;
+}
+
+
+  .logo-ticker-container::before,
+  .logo-ticker-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 50px;
+    z-index: 10;
+  }
+  .logo-ticker-container::before {
+    left: 0;
+    background: linear-gradient(to right, rgba(248, 248, 248, 1), rgba(248, 248, 248, 0));
+  }
+  .logo-ticker-container::after {
+    right: 0;
+    background: linear-gradient(to left, rgba(248, 248, 248, 1), rgba(248, 248, 248, 0));
+  }
+  .dark .logo-ticker-container::before {
+    background: linear-gradient(to right, rgba(31, 30, 38, 1), rgba(31, 30, 38, 0));
+  }
+  .dark .logo-ticker-container::after {
+    background: linear-gradient(to left, rgba(31, 30, 38, 1), rgba(31, 30, 38, 0));
+  }
+  @media (min-width: 1024px) { /* Large screens */
+    .logo-ticker > div {
+      gap: 128px; /* Widens spacing for large displays */
+    }
+  }
+  
+  @media (min-width: 768px) and (max-width: 1023px) { /* Medium screens */
+    .logo-ticker > div {
+      gap: 64px; /* Adjust spacing for mid-sized screens */
+    }
+  }
+  
+
+  @media (max-width: 640px) {
+    .logo-ticker img {
+      width: 80px;
+      height: 80px;
+    }
+    .logo-ticker > div {
+      gap: 24px;
+    }
+    .logo-ticker {
+      min-width: 1800px;
+    }
+  }
+}
+
+@layer components {
+  .primary-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffffff;
+    background: linear-gradient(180deg, var(--color-primary-700) 0%, var(--color-primary-800) 100%);
+    border: 1px solid var(--color-primary-600);
+    border-radius: 0.5rem;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+  }
+  .primary-button:hover {
+    background: linear-gradient(180deg, var(--color-primary-200) 0%, var(--color-primary-300) 100%);
+    border: 1px solid var(--color-primary-800);
+    color: var(--color-primary-800);
+    transform: scale(1.05);
+  }
+  .primary-button:focus {
+    background: linear-gradient(180deg, var(--color-primary-500) 0%, var(--color-primary-600) 100%);
+    border: 2px solid var(--color-blue-700);
+    outline: 2px solid var(--color-blue-700);
+    outline-offset: 2px;
+  }
+  .secondary-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    gap: 2px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-blue-800);
+    background: linear-gradient(180deg, var(--color-blue-100) 0%, var(--color-blue-200) 100%);
+    border: 1px solid var(--color-blue-800);
+    border-radius: 0.5rem;
+    transition: all 0.2s ease;
+    animation: slide-up 0.5s ease-out forwards;
+    box-sizing: border-box;
+  }
+  .secondary-button:hover {
+    background:white;
+    color: blue-800;
+    transform: scale(1.05);
+  }
+  .secondary-button:focus {
+    background: white;
+    border: 2px solid var(--color-blue-700);
+    outline: 2px solid var(--color-blue-700);
+    outline-offset: 2px;
+  }
+  .default-link {
+    display: block;
+    align-items: center;
+    padding: 4px 16px;
+    gap: 8px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-primary-950);
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+  }
+  
+  .default-link:hover {
+    background: linear-gradient(180deg, var(--color-primary-700) 0%, var(--color-primary-800) 100%);
+    color: white;
+    border-radius: 0.5rem;
+    text-decoration: underline;
+    transform: scale(1.05);
+  }
+  .default-link:focus {
+    padding: 4px px;
+    background: linear-gradient(180deg, var(--color-primary-500) 0%, var(--color-primary-600) 100%);
+    color: #ffffff;
+    border: 2px solid var(--color-blue-700);
+    outline: 2px solid var(--color-blue-700); 
+    outline-offset: 2px;
+    border-radius: 0.5rem;
+  }
+  .default-underline-link {
+    display: inline-block;
+    gap: 2px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-primary-900);
+    border-bottom: 1px solid var(--color-primary-700);
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+  }
+  .default-underline-link:hover {
+    background: linear-gradient(180deg, var(--color-primary-700) 0%, var(--color-primary-800) 100%);
+    color: white;
+    text-decoration: underline;
+    transform: scale(1.05);
+    animation: slide-up 0.5s ease-out forwards;
+  }
+  .default-underline-link:focus {
+    background: linear-gradient(180deg, var(--color-primary-500) 0%, var(--color-primary-600) 100%);
+    color: #ffffff;
+    border: 2px solid var(--color-blue-700);
+    outline: 2px solid var(--color-blue-700); 
+    outline-offset: 2px;
+    border-radius: 0.5rem;
+  }
+  button.active {
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    transform: scale(1.1);
+  }
+  button:hover {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }     
+
+
+@layer utilities {
+  @media (max-width: 640px) {
+    .primary-button,
+    .dark-primary-button,
+    .secondary-button {
+      height: 36px;
+      padding: 8px 12px;
+      font-size: 0.875rem;
+    }
+    .default-link,
+    .default-underline-link {
+      padding: 2px 12px;
+      font-size: 0.75rem;
+    }
+    .default-link:focus,
+    .default-underline-link:focus {
+      padding: 2px 2px;
+    }
+  }
+}
+}

@@ -1,0 +1,29 @@
+{{ if ( eq .Page.Params.footer "default") }}
+<footer class="p-4 bg-white md:p-8 lg:p-10 dark:bg-black_bg_card w-full">
+    <div class="mx-auto max-w-screen-xl text-center">
+        <a href="{{ .Site.Params.baseURL }}/" class="flex flex-col items-center" tabindex="-1">
+            <img src="/Logo-Uxess/UXESS.svg" class="h-10 mb-4 dark:hidden" alt="UXESS Logo" />
+            <img src="{{ `/Logo-Uxess/UXESS-dark.svg` | relURL }}"  class="h-11 w-auto mr-3 hidden dark:block" alt="UXESS Logo" />
+            <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"></span>
+        </a>
+    </div>
+        <p class="my-6 text-gray-500 dark:text-gray-400 text-center gap-6">Stay up to date. One post at a time! </p>
+        <ul class="flex flex-wrap justify-center gap-4 items-center mb-6 text-gray-900 dark:text-white">
+            <li>
+                <a href="/landing/NGO/" class="default-underline-link dark:text-primary-200 dark:border-b-primary-200">Home</a>
+            </li>
+            <li>
+                <a href="/blog/homepage/" class="default-underline-link  dark:text-primary-200 dark:border-b-primary-200">Blog</a>
+            </li>
+            <li>
+                <a href="/blog/homepage/" class="default-underline-link  dark:text-primary-200 dark:border-b-primary-200">About us</a>
+            </li>
+            <li>    
+                <a href="/contact/contact/" class="default-underline-link dark:text-primary-200 dark:border-b-primary-200">Contact us</a>
+            </li>
+            <li>
+        </ul>
+        <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400 block text-center"><span id="currentYear">2023</span> <a href="https://flowbite.com" class="hover:underline"></a>. All Rights Reserved.</span>
+    </div>
+</footer>
+{{ end }}
