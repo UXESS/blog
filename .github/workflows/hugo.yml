@@ -65,91 +65,28 @@ jobs:
           echo "Contents of .build directory:"
           ls -la .build/
           
-          # Copy files to public directory
-          echo "Copying files to public directory..."
-          cp -r .build/* public/ || {
-            echo "Failed to copy files to public directory"
-            exit 1
-          }
-          echo "Files copied successfully"
-          
-          # Create directories and copy files
-          echo "Creating custom URL structure..."
-          
-          # Create root index.html (landing page)
-          if [ -f "public/landing/NGO/index.html" ]; then
-            cp public/landing/NGO/index.html public/index.html
-            echo "Created root index.html"
-          else
-            echo "Error: public/landing/NGO/index.html not found"
-            exit 1
-          fi
-          
-          # Create contact page
-          if [ -f "public/contact/contact/index.html" ]; then
-            mkdir -p public/contact-us
-            cp public/contact/contact/index.html public/contact-us/index.html
-            echo "Created contact-us page"
-          else
-            echo "Error: public/contact/contact/index.html not found"
-            exit 1
-          fi
-          
-          # Create about page
-          if [ -f "public/about/about/index.html" ]; then
-            mkdir -p public/about-us
-            cp public/about/about/index.html public/about-us/index.html
-            echo "Created about-us page"
-          else
-            echo "Error: public/about/about/index.html not found"
-            exit 1
-          fi
-          
-          # Create articles directory and move blog homepage
-          if [ -f "public/blog/homepage/index.html" ]; then
-            mkdir -p public/articles
-            cp public/blog/homepage/index.html public/articles/index.html
-            echo "Created articles homepage"
-          else
-            echo "Error: public/blog/homepage/index.html not found"
-            exit 1
-          fi
-          
-          # Move individual articles
-          if [ -f "public/blog/article/index.html" ]; then
-            mkdir -p public/articles/article1
-            cp public/blog/article/index.html public/articles/article1/index.html
-            echo "Created article1 page"
-          else
-            echo "Error: public/blog/article/index.html not found"
-            exit 1
-          fi
-          
-          if [ -f "public/blog/article2/index.html" ]; then
-            mkdir -p public/articles/article2
-            cp public/blog/article2/index.html public/articles/article2/index.html
-            echo "Created article2 page"
-          else
-            echo "Error: public/blog/article2/index.html not found"
-            exit 1
-          fi
-          
-          # Fix URLs in all HTML files
-          echo "Fixing URLs in HTML files..."
-          find public -type f -name "*.html" -exec sed -i 's|http://localhost:1313/|/|g' {} \;
-          find public -type f -name "*.html" -exec sed -i 's|/landing/NGO/|/|g' {} \;
-          find public -type f -name "*.html" -exec sed -i 's|/contact/contact/|/contact-us/|g' {} \;
-          find public -type f -name "*.html" -exec sed -i 's|/about/about/|/about-us/|g' {} \;
-          find public -type f -name "*.html" -exec sed -i 's|/blog/homepage/|/articles/|g' {} \;
-          find public -type f -name "*.html" -exec sed -i 's|/blog/article/|/articles/article1/|g' {} \;
-          find public -type f -name "*.html" -exec sed -i 's|/blog/article2/|/articles/article2/|g' {} \;
-          echo "URLs fixed successfully"
+          # Create a simple index.html for testing
+          echo "Creating test index.html..."
+          cat > public/index.html << 'EOL'
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>UXESS Accessibility</title>
+          </head>
+          <body>
+              <h1>Welcome to UXESS Accessibility</h1>
+              <p>This is a test page to verify GitHub Pages deployment.</p>
+          </body>
+          </html>
+          EOL
           
           # Debug: List contents of public directory
           echo "Final contents of public directory:"
           ls -la public/
-          echo "Contents of public/articles directory:"
-          ls -la public/articles/
+          echo "Contents of index.html:"
+          cat public/index.html
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
