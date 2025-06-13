@@ -47,8 +47,15 @@ jobs:
           npm run build
           mkdir -p public
           cp -r .build/* public/
-          # Create root index.html that redirects to NGO page
-          echo '<!DOCTYPE html><html><head><meta http-equiv="refresh" content="0;url=/landing/NGO/"><link rel="canonical" href="/landing/NGO/"/><script type="text/javascript">window.location.href="/landing/NGO/"</script></head><body>Redirecting to <a href="/landing/NGO/">/landing/NGO/</a>...</body></html>' > public/index.html
+          # Copy NGO page content to root index.html and fix URLs
+          cp public/landing/NGO/index.html public/index.html
+          # Fix URLs in the root index.html
+          sed -i 's|http://localhost:1313/|/|g' public/index.html
+          sed -i 's|/landing/NGO/|/|g' public/index.html
+          # Fix asset paths
+          sed -i 's|/Logo-Uxess/|/Logo-Uxess/|g' public/index.html
+          sed -i 's|/app.css|/app.css|g' public/index.html
+          sed -i 's|/app.js|/app.js|g' public/index.html
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
