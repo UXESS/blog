@@ -47,15 +47,31 @@ jobs:
           npm run build
           mkdir -p public
           cp -r .build/* public/
-          # Copy NGO page content to root index.html and fix URLs
-          cp public/landing/NGO/index.html public/index.html
-          # Fix URLs in the root index.html
-          sed -i 's|http://localhost:1313/|/|g' public/index.html
-          sed -i 's|/landing/NGO/|/|g' public/index.html
-          # Fix asset paths
-          sed -i 's|/Logo-Uxess/|/Logo-Uxess/|g' public/index.html
-          sed -i 's|/app.css|/app.css|g' public/index.html
-          sed -i 's|/app.js|/app.js|g' public/index.html
+          # Debug: List contents of public directory
+          echo "Contents of public directory:"
+          ls -la public/
+          # Create a test index.html
+          cat > public/index.html << 'EOL'
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>UXESS Accessibility</title>
+              <meta http-equiv="refresh" content="0;url=/landing/NGO/">
+          </head>
+          <body>
+              <h1>Redirecting to UXESS Accessibility...</h1>
+              <p>If you are not redirected automatically, <a href="/landing/NGO/">click here</a>.</p>
+          </body>
+          </html>
+          EOL
+          # Debug: Check if index.html exists
+          echo "Checking if index.html exists:"
+          ls -la public/index.html
+          # Debug: Show first few lines of index.html
+          echo "First few lines of index.html:"
+          head -n 5 public/index.html
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
