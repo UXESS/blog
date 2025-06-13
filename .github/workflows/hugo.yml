@@ -47,31 +47,43 @@ jobs:
           npm run build
           mkdir -p public
           cp -r .build/* public/
+          
+          # Create root index.html (landing page)
+          cp public/landing/NGO/index.html public/index.html
+          
+          # Create contact page
+          mkdir -p public/contact-us
+          cp public/contact/contact/index.html public/contact-us/index.html
+          
+          # Create about page
+          mkdir -p public/about-us
+          cp public/about/about/index.html public/about-us/index.html
+          
+          # Create articles directory and move blog homepage
+          mkdir -p public/articles
+          cp public/blog/homepage/index.html public/articles/index.html
+          
+          # Move individual articles
+          mkdir -p public/articles/article1
+          cp public/blog/article/index.html public/articles/article1/index.html
+          
+          mkdir -p public/articles/article2
+          cp public/blog/article2/index.html public/articles/article2/index.html
+          
+          # Fix URLs in all HTML files
+          find public -type f -name "*.html" -exec sed -i 's|http://localhost:1313/|/|g' {} \;
+          find public -type f -name "*.html" -exec sed -i 's|/landing/NGO/|/|g' {} \;
+          find public -type f -name "*.html" -exec sed -i 's|/contact/contact/|/contact-us/|g' {} \;
+          find public -type f -name "*.html" -exec sed -i 's|/about/about/|/about-us/|g' {} \;
+          find public -type f -name "*.html" -exec sed -i 's|/blog/homepage/|/articles/|g' {} \;
+          find public -type f -name "*.html" -exec sed -i 's|/blog/article/|/articles/article1/|g' {} \;
+          find public -type f -name "*.html" -exec sed -i 's|/blog/article2/|/articles/article2/|g' {} \;
+          
           # Debug: List contents of public directory
           echo "Contents of public directory:"
           ls -la public/
-          # Create a test index.html
-          cat > public/index.html << 'EOL'
-          <!DOCTYPE html>
-          <html lang="en">
-          <head>
-              <meta charset="UTF-8">
-              <meta name="viewport" content="width=device-width, initial-scale=1.0">
-              <title>UXESS Accessibility</title>
-              <meta http-equiv="refresh" content="0;url=/blog/landing/NGO/">
-          </head>
-          <body>
-              <h1>Redirecting to UXESS Accessibility...</h1>
-              <p>If you are not redirected automatically, <a href="/blog/landing/NGO/">click here</a>.</p>
-          </body>
-          </html>
-          EOL
-          # Debug: Check if index.html exists
-          echo "Checking if index.html exists:"
-          ls -la public/index.html
-          # Debug: Show first few lines of index.html
-          echo "First few lines of index.html:"
-          head -n 5 public/index.html
+          echo "Contents of public/articles directory:"
+          ls -la public/articles/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
