@@ -58,11 +58,11 @@ jobs:
               <meta charset="UTF-8">
               <meta name="viewport" content="width=device-width, initial-scale=1.0">
               <title>UXESS Accessibility</title>
-              <meta http-equiv="refresh" content="0;url=/landing/NGO/">
+              <meta http-equiv="refresh" content="0;url=/blog/landing/NGO/">
           </head>
           <body>
               <h1>Redirecting to UXESS Accessibility...</h1>
-              <p>If you are not redirected automatically, <a href="/landing/NGO/">click here</a>.</p>
+              <p>If you are not redirected automatically, <a href="/blog/landing/NGO/">click here</a>.</p>
           </body>
           </html>
           EOL
