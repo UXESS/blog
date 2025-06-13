@@ -45,6 +45,7 @@ jobs:
       - name: Build with Hugo
         run: |
           npm run build
+          mkdir -p public
           cp -r .build/* public/
 
       - name: Upload artifact
